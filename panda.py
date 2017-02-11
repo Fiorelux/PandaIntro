@@ -22,8 +22,73 @@ MyDataframe = pd.DataFrame({'INDEX':col1,
 
 # print(MyDataframe.ix[3,'SQUARED'])
 
-print(MyDataframe[(MyDataframe['CAT'] == 'cat1') | (MyDataframe['SET'] != 'test')])
+#print(MyDataframe[(MyDataframe['CAT'] == 'cat1') | (MyDataframe['SET'] != 'test')])
 
 #MyDataframe['VALUES'] =[2,5,1]  this istruction doesn't work becouse there are only 3 elements
 
-MyDataframe.pop('THREE')
+#MyDataframe.pop('THREE')
+
+
+# # add a column
+MyDataframe['VALUES'] = [2,5,1,0.1]
+MyDataframe['NUM_CAT'] = [1,1,2,3]
+# # vectorised operations on columns
+# MyDataframe['DIVIDED'] = MyDataframe['VALUES']/MyDataframe['SQUARED']
+#
+# # column wide calcutions
+# print(MyDataframe['VALUES'].median())
+# print(MyDataframe['VALUES'].max())
+# # get unique values
+# print(MyDataframe['SET'].unique())
+#
+# print(MyDataframe.apply(max))
+
+
+# def addset(string):
+#     return string + 'set'
+# MyDataframe['SET'] = MyDataframe['SET'].map(addset)
+
+
+
+# MyDataframe['SET'] = MyDataframe['SET'].astype(str)
+# MyDataframe['SET'] = MyDataframe['SET'].map(lambda x: x.upper()) #lambda are use to create temporary function sintax= lambra parameters
+
+
+
+# # sorting on a column
+# MyDataframe= MyDataframe.sort_values(by='VALUES')
+# print(MyDataframe)
+# # sorting on multiple columns
+# MyDataframe= MyDataframe.sort_values(['NUM_CAT', 'VALUES'], ascending=[True, False])
+# print(MyDataframe)
+
+# ## merging with other data frames
+# MyDataframe2 = pd.DataFrame({'INDEX':[2,3,1,0],
+#                               'VALUE2':[11,22,33,44]})
+# print(MyDataframe2)
+#
+# # other options for how are 'inner', 'outer', 'right'
+# MyDataframe3 = pd.merge(MyDataframe, MyDataframe2,
+#                         how='left', on='INDEX')
+# print(MyDataframe3)
+
+Trainset = MyDataframe3[MyDataframe3['SET'] != 'TRAINSET']
+print(Trainset)
+# resetting rownumbers
+Trainset = Trainset.reset_index()
+print(Trainset)
+# notice the index has now become a column
+#  not to be confused with INDEX
+#  so columns in pandas case sensitive
+#  we can drop it
+Trainset.pop("index")
+print(Trainset)
+
+# setting a generic path
+import os
+outpath = os.path.abspath('./Results/export.csv')
+print(outpath)
+if not os.path.exists(os.path.abspath("./Results")):
+    os.makedirs("./Results")
+# exporting to csv file (without row numbers)
+Trainset.to_csv(outpath, index_label=False)
