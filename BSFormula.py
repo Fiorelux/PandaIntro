@@ -1,14 +1,22 @@
-from math import sqrt, log, exp, erf
-import random
-from numpy import arange
+# web
+import pandas_datareader.data as web
+import datetime
 import matplotlib.pyplot as plt
-S0 = 100.0
-# S0 = Stock price
-strikes = arange(50,150,1)
-# Exercise pricesrange
-T = 1 # T = Time to expiration
-r = 0.01 # r = risk-free interest rate
-q = 0.02 # q = dividend yield
-vol = 0.2 # vol = volatility
-Nsteps = 100 # Number or steps in MC
-
+from matplotlib import style
+# set starting and end date to import
+start = datetime.datetime(2013, 1, 1)
+end = datetime.datetime(2017, 2, 27)
+# import stock data for 'GOOGL'
+df = web.DataReader("GOOGL", 'yahoo', start, end)
+#loop over all dates and remove timestamp
+#dates=[]
+# for x in range(len(df)):
+#     newdate = str(df.index[x])
+#     newdate = newdate[0:10]
+#     dates.append(newdate)
+# #  WRONG!  use dataframe map!!!
+df['dates'] = df.index.map(lambda x: str(x)[:10])
+style.use('fivethirtyeight')
+df['High'].plot()
+plt.show()
+print(df)
