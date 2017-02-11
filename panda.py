@@ -95,14 +95,18 @@ MyDataframe['NUM_CAT'] = [1,1,2,3]
 #
 # Trainset_2 = pd.read_csv(os.path.abspath("./Results/export2.csv"), sep=";")
 # print(Trainset_2)
+#
+# import matplotlib.pyplot as plt
+# import matplotlib
+#
+# #optional style
+# matplotlib.style.use('ggplot')
+# # draw 2000 random points and plot the sum
+# df_rand = pd.Series(np.random.randn(2000))
+# df_rand_sum = df_rand.cumsum()
+# df_rand_sum.plot()
+# plt.show()
 
-import matplotlib.pyplot as plt
-import matplotlib
 
-#optional style
-matplotlib.style.use('ggplot')
-# draw 2000 random points and plot the sum
-df_rand = pd.Series(np.random.randn(2000))
-df_rand_sum = df_rand.cumsum()
-df_rand_sum.plot()
-plt.show()
+
+
